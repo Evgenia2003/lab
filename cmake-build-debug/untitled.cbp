@@ -76,6 +76,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/evgeniaponomareva/CLionProjects/untitled/libs/data_structures/matrix/matrix.c">
+			<Option target="untitled"/>
+		</Unit>
+		<Unit filename="/Users/evgeniaponomareva/CLionProjects/untitled/libs/data_structures/matrix/matrix.h">
+			<Option target="untitled"/>
+		</Unit>
 		<Unit filename="/Users/evgeniaponomareva/CLionProjects/untitled/libs/data_structures/vector/vector.c">
 			<Option target="untitled"/>
 		</Unit>
