@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include "libs/data_structures/vector/vector.h"
+#include "libs/data_structures/matrix/matrix.h"
 
 void test_pushBack_emptyVector() {
     vector v = createVector(0);
@@ -69,6 +70,13 @@ void test() {
     void test_back_oneElementInVector();
     void test_front_oneElementInVector();
 }
+//задача 1
+void swapRowsMinAndMaxE(matrix m) {
+    position min = getMinValuePos(m);
+    position max = getMaxValuePos(m);
+    swapRows(m, min.rowIndex, max.rowIndex);
+}
+
 
 int main() {
     test();
