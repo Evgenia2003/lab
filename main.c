@@ -77,6 +77,33 @@ void swapRowsMinAndMaxE(matrix m) {
     swapRows(m, min.rowIndex, max.rowIndex);
 }
 
+//задача 2
+int getMax(int *a, int n) {
+    int maxValue = a[0];
+    for (int i = 0; i < n; i++) {
+        if (a[i] > maxValue)
+            maxValue = a[i];
+    }
+    return maxValue;
+}
+
+void sortRowsByMaxElement(matrix m) {
+    insertionSortRowsMatrixByRowCriteria(m, getMax);
+}
+
+//задача 3
+int getMin(int *a, int n) {
+    int minValue = a[0];
+    for (int i = 0; i < n; i++) {
+        if (a[i] < minValue)
+            minValue = a[i];
+    }
+    return minValue;
+}
+
+void sortColsByMinElement(matrix m) {
+    insertionSortColsMatrixByColCriteria(m, getMin);
+}
 
 int main() {
     test();
