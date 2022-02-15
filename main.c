@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <mm_malloc.h>
+#include <stdbool.h>
 #include <assert.h>
 #include "libs/data_structures/vector/vector.h"
 #include "libs/data_structures/matrix/matrix.h"
@@ -103,6 +105,27 @@ int getMin(int *a, int n) {
 
 void sortColsByMinElement(matrix m) {
     insertionSortColsMatrixByColCriteria(m, getMin);
+}
+
+//задача 4
+matrix mulMatrices(matrix m1, matrix m2) {
+    if (m1.nCols != m2.nRows) {
+        fprintf(stderr, "error");
+        exit(1);
+    }
+    matrix product = getMemMatrix(m1.nRows, m2.nCols);
+    for (int i = 0; i < m1.nRows; i++)
+        for(int j = 0; j < m2.nCols; j++) {
+            product.values[i][j] = 0;
+            for (int t = 0; t < m2.nRows; t++)
+                product.values[i][j] += m1.values[i][t] * m2.values[t][j];
+        }
+    return (matrix) product;
+}
+
+void getSquareOfMatrixIfSymmetric(matrix *m) {
+    if (isSymmetricMatrix(*m))
+        *m = mulMatrices(*m, *m);
 }
 
 int main() {
