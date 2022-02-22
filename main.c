@@ -153,6 +153,36 @@ void transposeIfMatrixHasNotEqualSumOfRows(matrix m) {
         transposeSquareMatrix(m);
 }
 
+//задача 6
+bool isMutuallyInverseMatrices(matrix m1, matrix m2) {
+    matrix m = mulMatrices(m1, m2);
+    bool result = isEMatrix(m);
+
+    freeMemMatrix(m);
+
+    return result;
+}
+
+//заадча 7
+int max(int a, int b) {
+    return a > b ? a : b;
+}
+
+long long findSumOfMaxesOfPseudoDiagonal(matrix m) {
+    int size = m.nRows + m.nCols - 1;
+    int maxEl[size];
+
+    for (int i = 0; i < size; i++)
+        maxEl[i] = 0;
+
+    for (int i = 0; i < m.nCols; i++) {
+        for (int j = 0; j < m.nRows; j++) {
+            int index = i - j + m.nRows - 1;
+            maxEl[index] = max (maxEl[index], m.values[j][i]);
+        }
+    }
+    return getSum(maxEl, size);
+}
 
 int main() {
     test();
