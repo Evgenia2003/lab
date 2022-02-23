@@ -4,6 +4,19 @@
 #include <assert.h>
 #include "libs/data_structures/vector/vector.h"
 #include "libs/data_structures/matrix/matrix.h"
+#include <math.h>
+
+void swap_(void *a, void *b, size_t size) {
+    char *pa = a;
+    char *pb = b;
+    for (size_t i = 0; i < size; i++) {
+        char t = *pa;
+        *pa = *pb;
+        *pb = t;
+        pa++;
+        pb++;
+    }
+}
 
 void test_pushBack_emptyVector() {
     vector v = createVector(0);
@@ -201,6 +214,182 @@ int getMinInArea(matrix m) {
         int minEl = min(getMin(&m.values[i][left], right - left + 1), minEl);
     }
     return minEl;
+}
+
+//задача 9
+float getDistance(int *a, int n) {
+    float distance = 0;
+    for (int i = 0; i < n; i++) {
+        distance += (float) (a[i] * a[i]);
+    }
+    return sqrtf(distance);
+}
+
+void insertionSortRowsMatrixByRowCriteriaF(matrix m, float (*criteria)(int *, int)) {
+    float resultsCriteria[m.nRows];
+    for (int i = 0; i < m.nRows; i++)
+        resultsCriteria[i] = criteria(m.values[i], m.nCols);
+
+    for (int i = 1; i < m.nRows; i++) {
+        for (int j = i; j > 0 && resultsCriteria[j - 1] > resultsCriteria[j]; j--) {
+            swap_(&resultsCriteria[j - 1], &resultsCriteria[j], sizeof(float));
+            swapRows(m, j, j - 1);
+        }
+    }
+}
+
+void sortByDistances(matrix m) {
+    insertionSortRowsMatrixByRowCriteriaF(m, getDistance);
+}
+
+//задача 10
+int cmp_long_long(const void *pa, const void *pb) {
+    long long arg1 = *(const long long *) pa;
+    long long arg2 = *(const long long *) pb;
+
+    if (arg1 < arg2)
+        return -1;
+    if (arg1 > arg2)
+        return 1;
+    return 0;
+}
+
+int countUnique(long long *a, int n) {
+    if (n == 1)
+        return 1;
+
+    qsort(a, n, sizeof(long long), cmp_long_long);
+
+    int countOfUnique = 1;
+    for (int i = 1; i < n; i++) {
+        if (a[i] != a[i - 1])
+            countOfUnique++;
+    }
+
+    return countOfUnique;
+}
+
+int countEqClassesByRowsSum(matrix m) {
+    long long sumRows[m.nRows];
+    for (int i = 0; i < m.nRows; i++)
+        sumRows[i] = getSum(m.values[i], m.nCols);
+
+    return countUnique(sumRows, m.nRows);
+}
+
+//задача 11
+int getNSpecialElement(matrix m) {
+    int countSpecialEl = 0;
+
+    for (int i = 0; i < m.nCols; i++) {
+        int sumCol = 0;
+        int maxEl = m.values[0][i];
+
+        for (int j = 0; j < m.nRows; j++) {
+            if (m.values[j][i] > maxEl)
+                maxEl = m.values[j][i];
+            sumCol += m.values[j][i];
+        }
+        sumCol -= maxEl;
+
+        if (maxEl > sumCol)
+            countSpecialEl++;
+    }
+
+    return countSpecialEl;
+}
+
+//задача 12
+position getLeftMin(matrix m) {
+    int minEl = m.values[0][0];
+    position minPos = {0, 0};
+
+    for (int i = 0; i < m.nCols; i++) {
+        for (int j = 0; j < m.nRows; j++) {
+            if (m.values[j][i] < minEl) {
+                minEl = m.values[j][i];
+                minPos = (position) {j, i};
+            }
+        }
+    }
+
+    return minPos;
+}
+
+//задача 13
+bool isNonDescendingSorted(int *a, int n) {
+    for (int i = 1; i < n; i++)
+        if (a[i] < a[i - 1])
+            return false;
+    return true;
+}
+
+bool hasAllNonDescendingRows(matrix m) {
+    for (int i = 0; i < m.nRows; i++)
+        if (!isNonDescendingSorted(m.values[i], m.nCols))
+            return false;
+    return true;
+}
+
+int countNonDescendingRowsMatrices(matrix *ms, int nMatrix) {
+    int count = 0;
+    for (int i = 0; i < nMatrix; i++)
+        if (hasAllNonDescendingRows(ms[i]))
+            count++;
+    return count;
+}
+
+//задача 14
+int countValues(const int *a, int n, int value) {
+    int count = 0;
+    for (int i = 0; i < n; i++)
+        if (a[i] == value)
+            count++;
+    return count;
+}
+
+int countZeroRows(matrix m) {
+    int zeroRows = 0;
+    for (int i = 0; i < m.nRows; i++)
+        if (countValues(m.values[i], m.nCols, 0) == m.nCols)
+            zeroRows++;
+    return zeroRows;
+}
+
+void printMatrixWithMaxZeroRows(matrix *ms, int nMatrix) {
+    int zeroRowsCount[nMatrix];
+    for (int i = 0; i < nMatrix; i++)
+        zeroRowsCount[i] = countZeroRows(ms[i]);
+
+    int maxZeroRows = getMax(zeroRowsCount, nMatrix);
+
+    for (int i = 0; i < nMatrix; i++)
+        if (zeroRowsCount[i] == maxZeroRows)
+            outputMatrix(ms[i]);
+}
+
+//задача 15
+int getMatrixNorm(matrix m) {
+    int norm = abs(m.values[0][0]);
+
+    for (int i = 0; i < m.nRows; i++)
+        for (int j = 0; j < m.nCols; j++)
+            if (abs(m.values[i][j]) > norm)
+                norm = abs(m.values[i][j]);
+
+    return norm;
+}
+
+void printMatrixWithMinNorm(matrix *ms, int nMatrix) {
+    int norms[nMatrix];
+
+    for (int i = 0; i < nMatrix; i++)
+        norms[i] = getMatrixNorm(ms[i]);
+
+    int min = getMin(norms, nMatrix);
+    for (int i = 0; i < nMatrix; i++)
+        if (norms[i] == min)
+            outputMatrix(ms[i]);
 }
 
 int main() {
