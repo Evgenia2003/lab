@@ -106,17 +106,17 @@ bool isSquareMatrix(matrix m) {
 }
 
 bool areTwoMatricesEqual(matrix m1, matrix m2) {
-    long long nElementsFirstMatrix = (long long) m1.nRows * m1.nCols;
-    long long nElementsSecMatrix = (long long) m2.nRows * m2.nCols;
-    if (nElementsFirstMatrix != nElementsSecMatrix)
-        return 0;
-    for (int i = 0; i < m1.nRows; i++)
-        for (int j = 0; j < m1.nCols; j++)
-            if (m1.values[i][j] != m2.values[i][j])
-                return false;
+    bool isEqual = (m1.nRows == m2.nRows && m1.nCols == m2.nCols) ? true : false;
 
-    return true;
+    for (int i = 0; i < m1.nRows && isEqual; i++) {
+        for (int j = 0; j < m1.nCols && isEqual; j++) {
+            if (m1.values[i][j] != m2.values[i][j])
+                isEqual = false;
+        }
+    }
+    return isEqual;
 }
+
 
 bool isEMatrix(matrix m) {
     for (int i = 0; i < m.nRows; i++)
