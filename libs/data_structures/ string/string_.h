@@ -1,5 +1,10 @@
 #ifndef UNTITLED_STRING__H
 #define UNTITLED_STRING__H
+#define MAX_STRING_SIZE 100
+#define MAX_N_WORDS_IN_STRING 100
+#define MAX_WORD_SIZE 20
+
+char _stringBuffer[MAX_STRING_SIZE + 1];
 
 //возвращает количество символов в строке (не считая ноль-символ)
 size_t strlen_(const char *begin);
@@ -20,7 +25,7 @@ char* findNonSpaceReverse(char *rbegin, const char *rend);
 char* findSpaceReverse(char *rbegin, const char *rend);
 
 //возвращает отрицательное значение, если lhs располагается до rhs в лексикографическом порядке, значение 0, если lhs и rhs равны, иначе – положительное значение
-int strcmp(const char *lhs, const char *rhs)
+int strcmp(const char *lhs, const char *rhs);
 
 //записывает по адресу beginDestination фрагмент памяти, начиная с адреса beginSource до endSource. Возвращает указатель на следующий свободный фрагмент памяти в destination
 char* copy(const char *beginSource, const char *endSource, char *beginDestination);

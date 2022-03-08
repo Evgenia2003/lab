@@ -3,8 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/untitled.dir/libs/data_structures/matrix/matrix.c.o"
   "CMakeFiles/untitled.dir/libs/data_structures/vector/vector.c.o"
   "CMakeFiles/untitled.dir/main.c.o"
-  "untitled"
-  "untitled.pdb"
+  "libuntitled.a"
+  "libuntitled.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

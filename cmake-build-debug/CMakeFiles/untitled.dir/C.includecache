@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/evgeniaponomareva/CLionProjects/untitled/libs/data_structures/ string/string_.h
+
+/Users/evgeniaponomareva/CLionProjects/untitled/libs/data_structures/matrix/matrix.h
+stdbool.h
+-
+
+/Users/evgeniaponomareva/CLionProjects/untitled/libs/data_structures/vector/vector.h
+stdbool.h
+-
+
+/Users/evgeniaponomareva/CLionProjects/untitled/main.c
+stdio.h
+-
+memory.h
+-
+libs/data_structures/ string/string_.h
+/Users/evgeniaponomareva/CLionProjects/untitled/libs/data_structures/ string/string_.h
+mm_malloc.h
+-
+stdbool.h
+-
+assert.h
+-
+libs/data_structures/vector/vector.h
+/Users/evgeniaponomareva/CLionProjects/untitled/libs/data_structures/vector/vector.h
+libs/data_structures/matrix/matrix.h
+/Users/evgeniaponomareva/CLionProjects/untitled/libs/data_structures/matrix/matrix.h
+math.h
+-
+

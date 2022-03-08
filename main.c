@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <memory.h>
+#include "libs/data_structures/ string/string_.h"
 #include <mm_malloc.h>
 #include <stdbool.h>
 #include <assert.h>
@@ -76,15 +78,6 @@ void test_front_oneElementInVector() {
     assert(front(&vector1) == &vector1.data[0]);
 }
 
-void test() {
-    void test_pushBack_emptyVector();
-    void test_pushBack_fullVector();
-    void test_popBack_notEmptyVector();
-    void test_atVector_notEmptyVector();
-    void test_atVector_requestToLastElement();
-    void test_back_oneElementInVector();
-    void test_front_oneElementInVector();
-}
 //задача 1
 void swapRowsMinAndMaxE(matrix m) {
     position min = getMinValuePos(m);
@@ -1044,22 +1037,44 @@ void test_getMatrixNorm() {
     test_getMatrixNorm3();
 }
 
+void test_strLen_() {
+    char s[7] = "\tHello\t";
+    assert(strlen_(s) == 7);
+}
+
+void test_find() {
+    char *s = "Hello";
+    assert(find(s, &s[2], 'H') == &s[0]);
+}
+
+void test_findNonSpace() {
+    char *s = "Hello";
+    assert(findNonSpace(s) == &s[0]);
+}
+
+void test_findSpace1() {
+    char *s = "   ";
+    assert(findSpace(s) == &s[0]);
+}
+
+void test_findSpace2() {
+    char *s = "Hello";
+    assert(findSpace(s) == &s[5]);
+}
+
+void test_findSpace() {
+    test_findSpace1();
+    test_findSpace2();
+}
+
+
 void test() {
-    test_swapRowsMinAndMaxE();
-    test_sortRowsByMaxElement();
-    test_sortColsByMinElement();
-    test_getSquareOfMatrixIfSymmetric();
-    test_transposeIfMatrixHasNotEqualSumOfRows();
-    test_isMutuallyInverseMatrices();
-    test_findSumOfMaxesOfPseudoDiagonal();
-    test_getMinInArea();
-    test_sortByDistances();
-    test_countEqClassesByRowsSum();
-    test_getNSpecialElement();
-    test_swapPenultimateRow();
-    test_countNonDescendingRowsMatrices();
-    test_countZeroRows();
-    test_getMatrixNorm();
+    test_strLen_();
+    test_find();
+    test_findNonSpace();
+    test_findSpace();
+}
+
 
 
 int main() {

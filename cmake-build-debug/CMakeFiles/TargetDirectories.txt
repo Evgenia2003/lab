@@ -1,3 +1,4 @@
 /Users/evgeniaponomareva/CLionProjects/untitled/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 /Users/evgeniaponomareva/CLionProjects/untitled/cmake-build-debug/CMakeFiles/edit_cache.dir
 /Users/evgeniaponomareva/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir
+/Users/evgeniaponomareva/CLionProjects/untitled/cmake-build-debug/CMakeFiles/project.dir
