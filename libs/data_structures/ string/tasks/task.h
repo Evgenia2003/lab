@@ -113,7 +113,7 @@ void reverseDigitToStart(wordDescriptor word) {
     copyIf_(stringBuffer, endStringBuffer, recPosition, isalpha);
 }
 
-bool getWordReverse(char *rbegin, const char *rend, wordDescriptor *word) { //__aabbb__\0
+bool getWordReverse(char *rbegin, const char *rend, wordDescriptor *word) {
     word->begin = findNonSpaceReverse_(rbegin, rend);
     if (word->begin == rend)
         return false;

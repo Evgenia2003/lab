@@ -114,6 +114,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/evgeniaponomareva/CLionProjects/untitled/libs">
+			<Option target="untitled"/>
+		</Unit>
 		<Unit filename="/Users/evgeniaponomareva/CLionProjects/untitled/libs/data_structures/ string/string_.c">
 			<Option target="untitled"/>
 		</Unit>
